@@ -27,6 +27,13 @@ class User {
   async sign_up() {
     const client = this.body;
     try {
+      const user = await UserStorage.getUserInfo(client.user_id);
+      if(user){
+        if(user.user_id !== client.user_id){
+          return {success : true}
+        }
+        else return {success : false, msg : "이미 존재하는 아이디 입니다."}
+      }
       const response = await UserStorage.save(client);
       return response;
     } catch (err) {
@@ -74,7 +81,6 @@ class User {
 
   async new_pw() {
     const client = this.body;
-
     try {
       const response = await UserStorage.changePassword(
         client.user_id,
