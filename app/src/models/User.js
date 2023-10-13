@@ -91,6 +91,16 @@ class User {
       return { success: false, err };
     }
   }
+
+  async Create_room() {
+    const client = this.body;
+    try {
+      const response = await UserStorage.saveRoom(client);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = User;

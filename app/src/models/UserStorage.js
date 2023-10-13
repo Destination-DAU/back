@@ -52,6 +52,23 @@ class UserStorage {
       });
     });
   }
+
+  static async saveRoom(client) {
+    return new Promise((resolve, reject) => {
+      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime) VALUES(?,?,?,?,?,?);";
+      db.query(query, [
+        client.user_id,
+        client.room_startPoint,
+        client.room_endPoint,
+        client.room_name,
+        client.room_person,
+        client.room_startTime,
+      ], (err) => {
+        if (err) reject(`${err}`);
+        else resolve({ success: true });
+      });
+    });
+  }
 }
 
 module.exports = UserStorage;

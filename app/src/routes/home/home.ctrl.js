@@ -33,6 +33,10 @@ const output = {
     logger.info(`GET /new_pw 304 "새 비밀번호 화면으로 이동"`);
     res.render("home/new_pw");
   },
+  Create_room: (req, res) => {
+    logger.info(`GET /Create_room 304 "게시물 생성 화면으로 이동"`);
+    res.render("home/Create_room");
+  },
 };
 
 const process = {
@@ -99,6 +103,20 @@ const process = {
     const url = {
       method: "POST",
       path: "/new_pw",
+      status: response.err ? 409 : 201,
+    };
+
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Create_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Create_room();
+
+    const url = {
+      method: "POST",
+      path: "/Create_room",
       status: response.err ? 409 : 201,
     };
 
