@@ -55,7 +55,7 @@ class UserStorage {
 
   static async saveRoom(client) {
     return new Promise((resolve, reject) => {
-      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime) VALUES(?,?,?,?,?,?);";
+      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime, room_origin_lat, room_origin_lon, room_destination_lat, room_destination_lon) VALUES(?,?,?,?,?,?,?,?,?,?);";
       db.query(query, [
         client.user_id,
         client.room_startPoint,
@@ -63,9 +63,35 @@ class UserStorage {
         client.room_name,
         client.room_person,
         client.room_startTime,
+        client.room_origin_lat,
+        client.room_origin_lon,
+        client.room_destination_lat,
+        client.room_destination_lon,
       ], (err) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
+      });
+    });
+  }
+
+  static async searchRoom(client) {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT * FROM rooms";
+      db.query(query, [
+        client.user_id,
+        client.room_number,
+        client.room_startPoint,
+        client.room_endPoint,
+        client.room_name,
+        client.room_person,
+        client.room_startTime,
+        client.room_origin_lat,
+        client.room_origin_lon,
+        client.room_destination_lat,
+        client.room_destination_lon,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success : true, result});
       });
     });
   }

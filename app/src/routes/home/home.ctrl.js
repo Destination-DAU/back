@@ -37,6 +37,16 @@ const output = {
     logger.info(`GET /Create_room 304 "게시물 생성 화면으로 이동"`);
     res.render("home/Create_room");
   },
+  Search_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Search_room();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
 };
 
 const process = {
@@ -117,6 +127,19 @@ const process = {
     const url = {
       method: "POST",
       path: "/Create_room",
+      status: response.err ? 409 : 201,
+    };
+
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+  Search_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Search_room();
+
+    const url = {
+      method: "GET",
+      path: "/Search_room",
       status: response.err ? 409 : 201,
     };
 

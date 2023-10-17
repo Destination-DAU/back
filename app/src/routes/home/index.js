@@ -12,6 +12,8 @@ router.get("/find_id", ctrl.output.find_id);
 router.get("/find_pw", ctrl.output.find_pw);
 router.get("/new_pw", ctrl.output.new_pw);
 router.get("/Create_room", ctrl.output.Create_room);
+router.get("/Search_room", ctrl.output.Search_room);
+
 
 
 
@@ -21,6 +23,7 @@ router.post("/find_id", ctrl.process.find_id);
 router.post("/find_pw", ctrl.process.find_pw);
 router.post("/new_pw", ctrl.process.new_pw);
 router.post("/Create_room", ctrl.process.Create_room);
+router.post("/Search_room", ctrl.process.Search_room);
 
 
 

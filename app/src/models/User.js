@@ -101,6 +101,16 @@ class User {
       return { success: false, err };
     }
   }
+
+  async Search_room() {
+    try {
+      const response = await UserStorage.searchRoom(this.body);
+      // 서버에서 반환한 데이터 확인
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = User;
