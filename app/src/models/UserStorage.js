@@ -16,7 +16,7 @@ class UserStorage {
   static async save(userInfo) {
     return new Promise((resolve, reject) => {
       const query = "INSERT INTO users(user_name, user_id, user_pw, user_gender, user_question, user_answer) VALUES(?, ?, ?, ?, ?, ?);";
-      db.query(query, [userInfo.user_name, userInfo.user_id, userInfo.user_pw, userInfo.user_gender, userInfo.user_question,userInfo.user_answer], (err) => {
+      db.query(query, [userInfo.user_name, userInfo.user_id, userInfo.user_pw, userInfo.user_gender, userInfo.user_question, userInfo.user_answer], (err) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
       });
@@ -55,7 +55,7 @@ class UserStorage {
 
   static async saveRoom(client) {
     return new Promise((resolve, reject) => {
-      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime, room_origin_lat, room_origin_lon, room_destination_lat, room_destination_lon) VALUES(?,?,?,?,?,?,?,?,?,?);";
+      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime, room_origin_lat, room_origin_lon, room_destination_lat, room_destination_lon, user1) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
       db.query(query, [
         client.user_id,
         client.room_startPoint,
@@ -67,10 +67,19 @@ class UserStorage {
         client.room_origin_lon,
         client.room_destination_lat,
         client.room_destination_lon,
+        client.user1,
       ], (err) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
       });
+
+      // const query3 = "INSERT INTO join_room(user1) VALUES(?)";
+      // db.query(query3, [
+      //   client.user_id,
+      // ], (err) => {
+      //   if (err) reject(`${err}`);
+      //   else resolve({ success: true });
+      // })
     });
   }
 
@@ -91,7 +100,44 @@ class UserStorage {
         client.room_destination_lon,
       ], (err, result) => {
         if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async detailRoom(client) {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT * FROM rooms WHERE room_number = ?";
+      db.query(query, [
+        client.room_number,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async checkData(client) {
+    return new Promise((resolve, reject) => {
+      console.log(client.room_number, client.user, client.user_id);
+      let query2 = `UPDATE rooms SET ${client.user} = ? WHERE room_number = ?`;;
+      db.query(query2,[
+        client.user_id,
+        client.room_number,
+      ], (err, result) =>{
+        if(err) reject(err)
         else resolve({ success : true, result});
+      })
+    });
+  }
+
+  static async checkPerson(client) {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT * FROM room";
+      db.query(query, [
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
       });
     });
   }

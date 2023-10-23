@@ -111,6 +111,38 @@ class User {
       return { success: false, err };
     }
   }
+
+  async Detail_room() {
+    const client = this.body;
+    try {
+      const response = await UserStorage.detailRoom(this.body);
+      // 서버에서 반환한 데이터 확인
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async Check_data() {
+    const client = this.body;
+    try {
+      const response = await UserStorage.checkData(this.body);
+      // 서버에서 반환한 데이터 확인
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async Person_check() {
+    try {
+      const response = await UserStorage.checkPerson(this.body);
+      // 서버에서 반환한 데이터 확인
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = User;

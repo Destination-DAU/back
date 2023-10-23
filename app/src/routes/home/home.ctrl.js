@@ -47,6 +47,32 @@ const output = {
       return res.status(409).json(response);
     }
   },
+  
+  Detail_room: async (req, res) => {
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+
+  Check_data: async (req, res) => {
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+  Person_check: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Person_check();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
 };
 
 const process = {
@@ -143,6 +169,52 @@ const process = {
       status: response.err ? 409 : 201,
     };
 
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Detail_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Detail_room();
+
+    const url = {
+      method: "POST",
+      path: "/Detail_room",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Check_data: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Check_data();
+
+    const url = {
+      method: "POST",
+      path: "/Check_data",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Person_check: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Person_check();
+
+    const url = {
+      method: "GET",
+      path: "/Person_check",
+      status: response.err ? 409 : 201,
+    };
+
+    
     log(response, url);
     return res.status(url.status).json(response);
   },
