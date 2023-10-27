@@ -131,10 +131,38 @@ class UserStorage {
     });
   }
 
-  static async checkPerson(client) {
+  static async My_rooms(client) {
     return new Promise((resolve, reject) => {
-      const query = "SELECT * FROM room";
+      const query = "SELECT * FROM rooms where user1 = ? or user2 = ? or user3 = ? or user4 = ?";
       db.query(query, [
+        client.user_id,
+        client.user_id,
+        client.user_id,
+        client.user_id,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async exit_rooms(client) {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE rooms SET ${client.user} = NULL WHERE room_number = ?`;
+      db.query(query, [
+        client.room_number,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async delete_room(client) {
+    return new Promise((resolve, reject) => {
+      const query = `DELETE FROM rooms WHERE room_number = ?`;
+      db.query(query, [
+        client.room_number,
       ], (err, result) => {
         if (err) reject(err);
         else resolve({ success: true, result });

@@ -134,15 +134,36 @@
       }
     }
 
-    async Person_check() {
+    async My_room() {
       try {
-        const response = await UserStorage.checkPerson(this.body);
+        const response = await UserStorage.My_rooms(this.body);
         // 서버에서 반환한 데이터 확인
         return response;
       } catch (err) {
         return { success: false, err };
       }
     }
+
+    async Exit_room() {
+      try {
+        const response = await UserStorage.exit_rooms(this.body);
+        // 서버에서 반환한 데이터 확인
+        return response;
+      } catch (err) {
+        return { success: false, err };
+      }
+    }
+
+    async Delete_room() {
+      try {
+        const response = await UserStorage.delete_room(this.body);
+        // 서버에서 반환한 데이터 확인
+        return response;
+      } catch (err) {
+        return { success: false, err };
+      }
+    }
+
   }
 
   module.exports = User;

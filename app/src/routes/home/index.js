@@ -15,7 +15,10 @@ router.get("/Create_room", ctrl.output.Create_room);
 router.get("/Search_room", ctrl.output.Search_room);
 router.get("/Detail_room", ctrl.output.Detail_room);
 router.get("/Check_data", ctrl.output.Check_data);
-router.get("/Person_check", ctrl.output.Person_check);
+router.get("/My_room", ctrl.output.My_room);
+router.get("/Exit_room", ctrl.output.Exit_room);
+router.get("/Delete_room", ctrl.output.Delete_room);
+
 
 
 
@@ -33,7 +36,10 @@ router.post("/Create_room", ctrl.process.Create_room);
 router.post("/Search_room", ctrl.process.Search_room);
 router.post("/Detail_room", ctrl.process.Detail_room);
 router.post("/Check_data", ctrl.process.Check_data);
-router.post("/Person_check", ctrl.process.Person_check);
+router.post("/My_room", ctrl.process.My_room);
+router.post("/Exit_room", ctrl.process.Exit_room);
+router.post("/Delete_room", ctrl.process.Delete_room);
+
 
 
 

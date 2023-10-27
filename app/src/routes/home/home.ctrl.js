@@ -63,9 +63,29 @@ const output = {
       return res.status(409).json(response);
     }
   },
-  Person_check: async (req, res) => {
+  My_room: async (req, res) => {
     const user = new User(req.body);
-    const response = await user.Person_check();
+    const response = await user.My_room();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+  Exit_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Exit_room();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+  Delete_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Delete_room();
   
     if (response.success) {
       return res.status(200).json(response);
@@ -204,13 +224,13 @@ const process = {
     return res.status(url.status).json(response);
   },
 
-  Person_check: async (req, res) => {
+  My_room: async (req, res) => {
     const user = new User(req.body);
-    const response = await user.Person_check();
+    const response = await user.My_room();
 
     const url = {
-      method: "GET",
-      path: "/Person_check",
+      method: "POST",
+      path: "/My_room",
       status: response.err ? 409 : 201,
     };
 
@@ -218,6 +238,37 @@ const process = {
     log(response, url);
     return res.status(url.status).json(response);
   },
+
+  Exit_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Exit_room();
+
+    const url = {
+      method: "POST",
+      path: "/Exit_room",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Delete_room: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Delete_room();
+
+    const url = {
+      method: "POST",
+      path: "/Delete_room",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
 };
 
 module.exports = {
