@@ -164,6 +164,36 @@
       }
     }
 
+    async My() {
+      try {
+        const response = await UserStorage.my(this.body);
+        // 서버에서 반환한 데이터 확인
+        return response;
+      } catch (err) {
+        return { success: false, err };
+      }
+    }
+
+    async Update_user() {
+      try {
+        const response = await UserStorage.update_user(this.body);
+        // 서버에서 반환한 데이터 확인
+        return response;
+      } catch (err) {
+        return { success: false, err };
+      }
+    }
+
+    async Update_bank() {
+      try {
+        const response = await UserStorage.update_bank(this.body);
+        // 서버에서 반환한 데이터 확인
+        return response;
+      } catch (err) {
+        return { success: false, err };
+      }
+    }
+
   }
 
   module.exports = User;

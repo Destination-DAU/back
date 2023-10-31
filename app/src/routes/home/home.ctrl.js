@@ -93,6 +93,38 @@ const output = {
       return res.status(409).json(response);
     }
   },
+  My: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.My();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+
+  Update_user: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Update_user();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
+
+  Update_bank: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Update_bank();
+  
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(409).json(response);
+    }
+  },
 };
 
 const process = {
@@ -261,6 +293,51 @@ const process = {
     const url = {
       method: "POST",
       path: "/Delete_room",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  My: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.My();
+
+    const url = {
+      method: "POST",
+      path: "/My",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Update_user: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Update_user();
+
+    const url = {
+      method: "POST",
+      path: "/Update_user",
+      status: response.err ? 409 : 201,
+    };
+
+    
+    log(response, url);
+    return res.status(url.status).json(response);
+  },
+
+  Update_bank: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.Update_bank();
+
+    const url = {
+      method: "POST",
+      path: "/Update_bank",
       status: response.err ? 409 : 201,
     };
 

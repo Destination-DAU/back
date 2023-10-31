@@ -15,8 +15,8 @@ class UserStorage {
 
   static async save(userInfo) {
     return new Promise((resolve, reject) => {
-      const query = "INSERT INTO users(user_name, user_id, user_pw, user_gender, user_question, user_answer) VALUES(?, ?, ?, ?, ?, ?);";
-      db.query(query, [userInfo.user_name, userInfo.user_id, userInfo.user_pw, userInfo.user_gender, userInfo.user_question, userInfo.user_answer], (err) => {
+      const query = "INSERT INTO users(user_name, user_id, user_pw, user_gender, user_question, user_answer, user_phoneNumber) VALUES(?, ?, ?, ?, ?, ?,?);";
+      db.query(query, [userInfo.user_name, userInfo.user_id, userInfo.user_pw, userInfo.user_gender, userInfo.user_question, userInfo.user_answer, userInfo.user_phoneNumber], (err) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
       });
@@ -169,6 +169,56 @@ class UserStorage {
       });
     });
   }
+
+  static async my(client) {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT * FROM users WHERE user_id = ?`;
+      db.query(query, [
+        client.user_id,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async update_user(client) {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE users SET user_name = ? WHERE user_id = ?`;
+      db.query(query, [
+        client.user_name,
+        client.user_id,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    });
+  }
+
+  static async update_bank(client) {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE users SET user_bank = ? WHERE user_id = ?`;
+      const query2 = `UPDATE users SET user_bnum = ? WHERE user_id = ?`;
+      
+      db.query(query, [
+        client.user_bank,
+        client.user_id,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+
+      db.query(query2, [
+        client.user_bnum,
+        client.user_id,
+      ], (err, result) => {
+        if (err) reject(err);
+        else resolve({ success: true, result });
+      });
+    
+    });
+  }
+
 }
 
 module.exports = UserStorage;

@@ -18,6 +18,12 @@ router.get("/Check_data", ctrl.output.Check_data);
 router.get("/My_room", ctrl.output.My_room);
 router.get("/Exit_room", ctrl.output.Exit_room);
 router.get("/Delete_room", ctrl.output.Delete_room);
+router.get("/My", ctrl.output.My);
+router.get("/Update_user", ctrl.output.Update_user);
+router.get("/Update_bank", ctrl.output.Update_bank);
+
+
+
 
 
 
@@ -39,6 +45,12 @@ router.post("/Check_data", ctrl.process.Check_data);
 router.post("/My_room", ctrl.process.My_room);
 router.post("/Exit_room", ctrl.process.Exit_room);
 router.post("/Delete_room", ctrl.process.Delete_room);
+router.post("/My", ctrl.process.My);
+router.post("/Update_user", ctrl.process.Update_user);
+router.post("/Update_bank", ctrl.process.Update_bank);
+
+
+
 
 
 
