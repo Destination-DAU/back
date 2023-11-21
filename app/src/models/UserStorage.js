@@ -119,10 +119,10 @@ class UserStorage {
 
   static async checkData(client) {
     return new Promise((resolve, reject) => {
-      console.log(client.room_number, client.user, client.user_id);
+      console.log(client.room_number, client.user, client.user_name);
       let query2 = `UPDATE rooms SET ${client.user} = ? WHERE room_number = ?`;;
       db.query(query2,[
-        client.user_id,
+        client.user_name,
         client.room_number,
       ], (err, result) =>{
         if(err) reject(err)
@@ -135,10 +135,10 @@ class UserStorage {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM rooms where user1 = ? or user2 = ? or user3 = ? or user4 = ?";
       db.query(query, [
-        client.user_id,
-        client.user_id,
-        client.user_id,
-        client.user_id,
+        client.user_name,
+        client.user_name,
+        client.user_name,
+        client.user_name,
       ], (err, result) => {
         if (err) reject(err);
         else resolve({ success: true, result });

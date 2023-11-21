@@ -24,15 +24,6 @@ router.get("/Update_bank", ctrl.output.Update_bank);
 
 
 
-
-
-
-
-
-
-
-
-
 router.post("/login", ctrl.process.login);
 router.post("/sign_up", ctrl.process.sign_up);
 router.post("/find_id", ctrl.process.find_id);

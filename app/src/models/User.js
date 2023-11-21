@@ -14,7 +14,7 @@
 
         if (user) {
           if (user.user_id === client.user_id && user.user_pw === client.user_pw) {
-            return { success: true };
+            return { success: true, user_name: user.user_name };
           }
           return { success: false, msg: "비밀번호가 틀렸습니다." };
         }
