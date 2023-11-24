@@ -55,7 +55,7 @@ class UserStorage {
 
   static async saveRoom(client) {
     return new Promise((resolve, reject) => {
-      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime, room_origin_lat, room_origin_lon, room_destination_lat, room_destination_lon, user1) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
+      const query = "INSERT INTO rooms(user_id, room_startPoint, room_endPoint, room_name, room_person, room_startTime, room_origin_lat, room_origin_lon, room_destination_lat, room_destination_lon, user1, price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
       db.query(query, [
         client.user_id,
         client.room_startPoint,
@@ -68,6 +68,7 @@ class UserStorage {
         client.room_destination_lat,
         client.room_destination_lon,
         client.user1,
+        client.price,
       ], (err) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
